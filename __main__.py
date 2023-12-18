@@ -1,4 +1,3 @@
-from termcolor import cprint
 from sys import stdout
 import os
 import pickle
@@ -68,7 +67,7 @@ else:
     
 save(names,f"{os.environ['USERPROFILE']}/chatter/names.pk")
 while True:
-    cmd = input("$>")
+    cmd = input("$> ")
     if cmd == "help":
         for x,y in zip(cmd_helps.keys(),cmd_helps.values()):
             print(x,y)
