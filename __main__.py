@@ -1,8 +1,18 @@
-from sys import stdout
-import os
-import pickle
-import platform
-os.mkdir(f"{os.environ['USERPROFILE']}/chatter")
+try:
+    from termcolor import cprint
+    from sys import stdout
+    import os
+    import pickle
+    import platform
+    import datetime
+    import inquirer
+except ModuleNotFoundError as e:
+    print("Could not use",e,"please add to pip")
+    exit()
+try:
+    os.mkdir(f"{os.environ['USERPROFILE']}/chatter")
+except FileExistsError:
+    pass
 
 write = stdout.write
 def up(amount):
@@ -24,6 +34,19 @@ def clear():
         os.system("cls")
     else:
         os.system("clear")
+def choose(item_name:str,message:str,items:list):
+
+    questions = [
+        inquirer.List(
+            item_name,
+            message=message,
+            choices=items,
+        ),
+    ]
+    username = inquirer.prompt(questions)
+    return username[item_name] 
+
+time_form = str("%l:%M %P")
 
 pass_attempts = 0
 cmd_helps = {
@@ -48,7 +71,7 @@ if username in names.keys():
             print("You entered the wrong password too many times")
             exit()
         print("Please enter your password")
-        password_attempt = input(">").lower()
+        password_attempt = input(">")
         if password_attempt == names[username]:
             break
         print("Wrong password please try again")
@@ -67,7 +90,24 @@ else:
     
 save(names,f"{os.environ['USERPROFILE']}/chatter/names.pk")
 while True:
-    cmd = input("$> ")
+    cmd = input("$>")
     if cmd == "help":
         for x,y in zip(cmd_helps.keys(),cmd_helps.values()):
             print(x,y)
+    elif cmd == "exit":
+        break
+    elif cmd.startswith("echo"):
+        print(cmd[5:])
+    elif cmd == "time":
+        print(date.strftime(f"%l:%M %p"))
+    elif cmd.startswith("strftime "):
+        print(date.strftime(cmd[9:]))
+    elif cmd == "date":
+        print(date.strftime("%D"))
+    elif cmd == "settime":
+        messsage = choose("Times","What format do you want to see the time?",
+                          ["12:59 pm","24:59"])
+        if messsage == "12:59 pm":
+            time_form = "%I:%M %P"
+        elif messsage == "24:59":
+            time_form = "%H:%M"
