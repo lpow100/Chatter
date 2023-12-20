@@ -117,4 +117,4 @@ while True:
         elif messsage == "24:59":
             time_form = "%H:%M"
     else:
-        print(f'[red]Error:\n   "{cmd}"\nUnknown command: {cmd}[red]')
+        print(f'[red]Error:\n   "{cmd}"\nSyntaxError: "{cmd}" is not defined[red]')
