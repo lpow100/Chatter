@@ -47,8 +47,6 @@ def choose(item_name:str,message:str,items:list):
     username = inquirer.prompt(questions)
     return username[item_name] 
 
-time_form = str("%l:%M %P")
-
 pass_attempts = 0
 cmd_helps = {
     "time":"prints the time",
@@ -106,15 +104,17 @@ while True:
     elif cmd.startswith("echo"):
         print(cmd[5:])
     elif cmd == "time":
-        print(date.strftime(f"%l:%M %p"))
+        print(date.strftime("[white]%X[white]"))
     elif cmd.startswith("strftime "):
         print(date.strftime(cmd[9:]))
     elif cmd == "date":
-        print(date.strftime("%D"))
+        print(date.strftime("[white]%m:%d:%Y[white]"))
     elif cmd == "settime":
         messsage = choose("Times","What format do you want to see the time?",
-                          ["12:59 pm","24:59","12:59 59 pm"])
+                          ["12:59 pm","24:59"])
         if messsage == "12:59 pm":
-            time_form = "%I:%M %p"
+            time_form = "%I:%M %P"
         elif messsage == "24:59":
             time_form = "%H:%M"
+    else:
+        print(f'[red]Error:\n   "{cmd}"\nSyntaxError: "{cmd}" is not defined[red]')
