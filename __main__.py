@@ -46,7 +46,8 @@ def choose(item_name:str,message:str,items:list):
     username = inquirer.prompt(questions)
     return username[item_name] 
 
-time_form = str("%l:%M %P")
+time_form = str("%I:%M %p")
+date_form = str("%I:%M %p")
 
 pass_attempts = 0
 cmd_helps = {
@@ -100,15 +101,17 @@ while True:
     elif cmd.startswith("echo"):
         print(cmd[5:])
     elif cmd == "time":
-        print(date.strftime(f"%l:%M %p"))
+        print(date.strftime(time_form))
     elif cmd.startswith("strftime "):
         print(date.strftime(cmd[9:]))
     elif cmd == "date":
         print(date.strftime("%D"))
     elif cmd == "settime":
         messsage = choose("Times","What format do you want to see the time?",
-                          ["12:59 pm","24:59"])
+                          ["12:59 pm","24:59","12:59 59 pm"])
         if messsage == "12:59 pm":
-            time_form = "%I:%M %P"
+            time_form = "%I:%M %p"
         elif messsage == "24:59":
             time_form = "%H:%M"
+        elif messsage == "12:59 59 pm":
+            time_form = "%I:%M %S %p"
