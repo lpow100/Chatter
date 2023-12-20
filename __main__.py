@@ -91,8 +91,7 @@ else:
     
 save(names,f"{os.environ['USERPROFILE']}/chatter/names.pk")
 while True:
-    date = datetime.datetime.now()
-    cmd = input("$> ")
+    cmd = input("$>")
     if cmd == "help":
         for x,y in zip(cmd_helps.keys(),cmd_helps.values()):
             print(x,y)
