@@ -47,7 +47,8 @@ def choose(item_name:str,message:str,items:list):
     return username[item_name] 
 
 time_form = str("%I:%M %p")
-date_form = str("%I:%M %p")
+date_form = str("%m/%d/%Y")
+date = datetime.datetime.now()
 
 pass_attempts = 0
 cmd_helps = {
@@ -104,7 +105,7 @@ while True:
     elif cmd.startswith("strftime "):
         print(date.strftime(cmd[9:]))
     elif cmd == "date":
-        print(date.strftime("%D"))
+        print(date.strftime(date_form))
     elif cmd == "settime":
         messsage = choose("Times","What format do you want to see the time?",
                           ["12:59 pm","24:59","12:59 59 pm"])
