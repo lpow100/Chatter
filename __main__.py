@@ -1,5 +1,5 @@
 try:
-    from rich import print
+    from rich import print as cprint
     from sys import stdout
     import os
     import pickle
