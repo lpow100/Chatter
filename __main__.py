@@ -49,11 +49,11 @@ def choose(item_name:str,message:str,items:list):
 
 pass_attempts = 0
 cmd_helps = {
-    "time":"prints the time",
-    "date":"prints the date",
-    "python":"runs the python interprter",
-    "echo":"prints what you put",
-    "exit":"stops the program"
+    '"time"':"prints the time",
+    '"date"':"prints the date",
+    '"python"':"runs the python interprter",
+    '"echo"':"prints what you put",
+    '"exit"':"stops the program"
 }
 
 print("Hi I am chatter your chatbot!")
@@ -117,4 +117,4 @@ while True:
         elif messsage == "24:59":
             time_form = "%H:%M"
     else:
-        print(f'[red]Error:\n   "{cmd}"\nSyntaxError: "{cmd}" is not defined[red]')
+        print(f'[red]InValidCommandError:\n   "{cmd}"\nCommandError: "{cmd}" is not a command: type "help" for help[red]')
