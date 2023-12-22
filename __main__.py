@@ -1,6 +1,7 @@
 try:
     from rich import print as cprint
     from sys import stdout
+    import sys
     import os
     import pickle
     import platform
@@ -65,7 +66,8 @@ def date_maker()->str:
         else:
             del forms[forms.index(date1)]
             messsage.append(date1)
-        up(len(forms)+2)
+        if i > 3:
+            up(len(forms)+3)
         
     date_list = []
     for part in messsage:
@@ -113,7 +115,7 @@ cmd_helps = {
     "echo":"prints what you put",
     "exit":"stops the program"
 }
-time_form = "%I:%M %P"
+time_form = "%l:%M %P"
 date_form = "%m/%d/%y"
 
 print("Hi I am chatter your chatbot!")
@@ -171,19 +173,12 @@ while True:
         messsage = choose("Times","What format do you want to see the time?",
                           ["12:59 pm","24:59","12:59 59 pm"])
         if messsage == "12:59 pm":
-            time_form = "%I:%M %P"
+            time_form = "%l:%M %P"
         elif messsage == "24:59":
             time_form = "%H:%M"
         elif messsage == "12:59 59 pm":
-            time_form = "%I:%M %S %p"
-    elif cmd == "setdate":
-        messsage = choose("Dates","What format do you want to see the date?",
-                          ["12/31/09","","12:59 59 pm"])
-        if messsage == "12:59 pm":
-            time_form = "%I:%M %p"
-        elif messsage == "24:59":
-            time_form = "%H:%M"
-        elif messsage == "12:59 59 pm":
-            time_form = "%I:%M %S %p"
+            time_form = "%l:%M %S %p"
+    elif cmd[0] == "setdate":
+        date_form = date_maker()
     else:
         cprint(f"[#B00020]Error: {cmd} is not a valid command please use help for help[#B00020]",file=sys.stderr)
