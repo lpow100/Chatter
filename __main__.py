@@ -1,7 +1,6 @@
 try:
-    from rich import print as cprint
+    from rich import print
     from sys import stdout
-    import sys
     import os
     import pickle
     import platform
@@ -177,7 +176,14 @@ while True:
             time_form = "%H:%M"
         elif messsage == "12:59 59 pm":
             time_form = "%I:%M %S %p"
-    elif cmd[0] == "setdate":
-        date_form = date_maker()
+    elif cmd == "setdate":
+        messsage = choose("Dates","What format do you want to see the date?",
+                          ["12/31/09","","12:59 59 pm"])
+        if messsage == "12:59 pm":
+            time_form = "%I:%M %p"
+        elif messsage == "24:59":
+            time_form = "%H:%M"
+        elif messsage == "12:59 59 pm":
+            time_form = "%I:%M %S %p"
     else:
-        cprint(f'[#ea4541]Invalid command: "{cmd}"\n"{cmd}" is not a valid command please try help[#ea4541]',file=sys.stderr)
+        cprint(f"[#B00020]Error: {cmd} is not a valid command please use help for help[#B00020]",file=sys.stderr)
